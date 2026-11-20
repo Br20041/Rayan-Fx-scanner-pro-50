@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071321"><meta name="description" content="RAYAN FX v3 professional manual forex analysis">
+<link rel="manifest" href="manifest.webmanifest"><title>RAYAN FX v3</title>
+<style>
+:root{--bg:#06111e;--panel:#0e2032;--panel2:#091a2a;--line:#24435d;--txt:#eef7ff;--muted:#9cb3c9;--cyan:#39d6d0;--green:#42d392;--red:#ff7180;--amber:#ffd078}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0%,#12314a 0,#06111e 52%);color:var(--txt);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{max-width:980px;margin:auto;padding:20px 15px 10px;display:flex;align-items:center;justify-content:space-between;gap:10px}h1{font-size:26px;letter-spacing:1.3px;margin:0}h1 span{color:var(--cyan)}.sub{font-size:12px;color:var(--muted);margin-top:4px}
+.status{font-size:11px;border:1px solid var(--line);border-radius:30px;padding:7px 10px;color:var(--amber);white-space:nowrap}.status.live{color:var(--green);border-color:#28654f}
+main{max-width:980px;margin:auto;padding:0 12px 35px}.tabs{display:flex;gap:7px;overflow:auto;padding:8px 0 4px}.tab{background:#10273b;color:var(--muted);border:1px solid var(--line);padding:9px 12px;border-radius:22px;white-space:nowrap;font-size:12px}.tab.active{background:var(--cyan);color:#06212a;border-color:var(--cyan)}
+.panel{background:linear-gradient(150deg,#10253a,#0b1b2b);border:1px solid var(--line);border-radius:16px;padding:15px;margin:11px 0;box-shadow:0 9px 30px #0003}
+h2{font-size:16px;margin:0 0 12px;color:#e1fbff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+label{display:block;color:var(--muted);font-size:12px;margin:0 0 5px}input,select,textarea{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--txt);padding:11px;font:inherit;min-width:0}textarea{min-height:125px;font:12px ui-monospace,monospace;resize:vertical}
+button{border:0;border-radius:10px;padding:11px 14px;background:var(--cyan);color:#06212a;font-weight:800;cursor:pointer}button.secondary{background:#1c3851;color:var(--txt);border:1px solid var(--line)}button:disabled{opacity:.5}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.hint{font-size:12px;color:var(--muted);line-height:1.5}.muted{color:var(--muted)}.hidden{display:none!important}
+.card{background:#081a2a;border:1px solid var(--line);border-radius:13px;padding:13px;margin-top:10px}.big{font-size:27px;font-weight:900;letter-spacing:1px}.buy{color:var(--green)}.sell{color:var(--red)}.wait{color:var(--amber)}.metric{background:#091a2a;border:1px solid var(--line);border-radius:10px;padding:10px;min-width:0}.metric span{font-size:11px;color:var(--muted)}.metric b{display:block;font-size:16px;margin-top:4px;overflow-wrap:anywhere}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.pill{display:inline-block;border:1px solid var(--line);padding:4px 8px;border-radius:20px;font-size:11px;color:var(--muted);margin:2px}.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.item{padding:9px 0;border-bottom:1px solid #20384d;line-height:1.45}.item:last-child{border:0}.check{display:flex;gap:8px;align-items:center;margin:8px 0}.check input{width:auto;accent-color:var(--cyan)}.chart{width:100%;height:170px;background:#081827;border:1px solid var(--line);border-radius:12px;margin-top:10px}.file{border:1px dashed #42617c;padding:14px;border-radius:12px}.preview{max-width:100%;max-height:260px;border-radius:10px;margin-top:10px}.notice{border-left:3px solid var(--amber);padding:8px 10px;background:#2b2518;border-radius:6px;color:#ffe2ad;font-size:12px;line-height:1.5}
+footer{max-width:980px;margin:auto;padding:0 15px 25px;color:var(--muted);font-size:11px;line-height:1.55}
+@media(max-width:520px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}header{align-items:flex-start}.big{font-size:24px}}
+</style></head>
+<body>
+<header><div><h1>RAYAN <span>FX</span> <small style="font-size:12px;color:#9cb3c9">v3.0</small></h1><div class="sub">Live market data · AI chart vision · Manual decisions only</div></div><div id="connection" class="status">NOT CONNECTED</div></header>
+<main>
+<div class="tabs">
+<button class="tab active" data-tab="market">Live market</button><button class="tab" data-tab="analysis">AI screenshot</button><button class="tab" data-tab="risk">Risk & journal</button><button class="tab" data-tab="settings">Settings</button>
+</div>
+
+<section id="market" class="pane">
+<div class="panel">
+<div class="row"><h2>Live market monitor</h2><span id="updated" class="hint">No data yet</span></div>
+<div class="grid">
+<div><label>Forex pair</label><select id="symbol"><option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option><option>USD/CHF</option><option>AUD/USD</option><option>USD/CAD</option><option>NZD/USD</option><option>EUR/JPY</option><option>GBP/JPY</option><option>EUR/GBP</option></select></div>
+<div><label>Chart timeframe</label><select id="interval"><option value="5min">M5</option><option value="15min">M15</option><option value="1h" selected>H1</option><option value="4h">H4</option><option value="1day">D1</option></select></div>
+<div><label>Refresh frequency</label><select id="refresh"><option value="30">30 seconds</option><option value="60" selected>60 seconds</option><option value="120">2 minutes</option></select></div>
+<div><label>Higher timeframe</label><select id="higherInterval"><option value="15min">M15</option><option value="1h">H1</option><option value="4h" selected>H4</option><option value="1day">D1</option></select></div>
+</div>
+<div class="actions"><button id="connect">CONNECT / REFRESH</button><button class="secondary" id="stop">STOP UPDATES</button></div>
+<div class="grid3" style="margin-top:12px">
+<div class="metric"><span>Latest price</span><b id="price">—</b></div><div class="metric"><span>Bid / Ask</span><b id="bidask">—</b></div><div class="metric"><span>Spread</span><b id="spread">—</b></div>
+</div>
+<div id="liveNote" class="hint" style="margin-top:10px">Connect after the server credentials have been configured. Prices may be delayed or differ from your MT5 broker.</div>
+</div>
+<div class="panel">
+<h2>RAYAN analysis engine</h2>
+<div class="grid">
+<div><label>Account balance (USD)</label><input id="balance" type="number" value="100" min="0"></div>
+<div><label>Risk per trade (%)</label><input id="riskPct" type="number" value="0.5" min="0.1" max="1" step="0.1"></div>
+</div>
+<label class="check"><input type="checkbox" id="newsBlock" checked> News calendar not independently checked — block trade ideas</label>
+<label class="check"><input type="checkbox" id="eventBlock"> High-impact event is near</label>
+<label class="check"><input type="checkbox" id="spreadBlock"> Spread/execution conditions are poor</label>
+<div class="actions"><button id="runAnalysis">ANALYSE LIVE CANDLES</button></div>
+<div id="analysisResult" class="card"><div class="big wait">WAIT</div><p class="hint">Connect to load live candles, then run the analysis. The engine can also return WAIT.</p></div>
+</div>
+</section>
+
+<section id="analysis" class="pane hidden">
+<div class="panel">
+<h2>AI screenshot analysis</h2>
+<p class="hint">Upload a clear MT5/chart screenshot. The image is sent to the protected server function and then to the configured vision model. Do not include account numbers, balances, names or other private details in the screenshot.</p>
+<div class="file"><label>Choose chart screenshot</label><input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp"><img id="imagePreview" class="preview hidden"></div>
+<label style="margin-top:12px">What should the AI focus on? (optional)</label><textarea id="focus" style="min-height:75px" placeholder="Example: Analyse EUR/USD H1, check trend, BOS/CHOCH, liquidity, FVG and whether a trade should be avoided."></textarea>
+<div class="actions"><button id="visionBtn">ANALYSE SCREENSHOT</button></div>
+<div id="visionResult" class="card"><span class="hint">Your AI chart report will appear here.</span></div>
+</div>
+</section>
+
+<section id="risk" class="pane hidden">
+<div class="panel">
+<h2>Risk calculator</h2>
+<div class="grid">
+<div><label>Account balance (USD)</label><input id="rBalance" type="number" value="100"></div>
+<div><label>Risk (%)</label><input id="rPercent" type="number" value="0.5" min="0.1" max="1" step="0.1"></div>
+<div><label>Entry price</label><input id="entry" type="number" step="any"></div>
+<div><label>Stop-loss price</label><input id="sl" type="number" step="any"></div>
+<div><label>USD value per 1.0 price move per 1 lot</label><input id="contractValue" type="number" step="any" placeholder="Broker-specific"></div>
+</div>
+<div class="actions"><button id="calcRisk">CALCULATE POSITION SIZE</button></div><div id="riskResult" class="card hint">Position sizing is unavailable until the exact contract value is confirmed with your broker.</div>
+</div>
+<div class="panel"><h2>Trade journal</h2><div class="actions"><button class="secondary" id="saveJournal">SAVE CURRENT ANALYSIS</button><button class="secondary" id="exportJournal">EXPORT JOURNAL</button><button class="secondary" id="clearJournal">CLEAR JOURNAL</button></div><div id="journal" class="hint">No saved records.</div></div>
+</section>
+
+<section id="settings" class="pane hidden">
+<div class="panel">
+<h2>Secure connection setup</h2>
+<p class="hint">These credentials are not embedded in the app. The server holds the provider secrets. Enter only your private app access PIN here; do not paste API keys into this screen.</p>
+<label>RAYAN access PIN</label><input id="pin" type="password" autocomplete="off" placeholder="PIN supplied by your deployment setup">
+<div class="actions"><button id="savePin">SAVE PIN ON THIS DEVICE</button><button class="secondary" id="testServer">TEST SERVER</button></div>
+<div id="serverStatus" class="hint">Server status not checked.</div>
+</div>
+<div class="panel">
+<h2>Provider and security status</h2>
+<div class="item">Market data: Twelve Data REST API. Forex price/candle availability and refresh limits depend on your provider plan.</div>
+<div class="item">Screenshot AI: OpenAI Responses API with image input. API usage may incur separate charges.</div>
+<div class="item">Secrets: stored as Netlify Function environment variables, not in browser code.</div>
+<div class="item">Protection: app PIN, server-side key handling, image type/size checks and request limits.</div>
+<div class="notice">A PIN is not a full user-account system. Keep your site private and rotate the PIN if it is shared. Do not use this app to execute trades automatically.</div>
+</div>
+</section>
+</main>
+<footer>RAYAN FX is an educational decision-support tool, not financial advice. Live data is supplied by a third party and may be delayed, incomplete or different from broker quotes. Screenshot AI can misread chart labels and cannot know hidden order flow. Verify all prices and contract specifications in MT5. Forex/CFDs are high risk; demo-test first and never risk money you cannot afford to lose.</footer>
+<script>
+const $=id=>document.getElementById(id);let timer=null,market=null,lastAnalysis=null,imageData=null;
+const pin=()=>sessionStorage.getItem("rayan_pin")||"";
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("hidden",p.id!==b.dataset.tab))});
+$("savePin").onclick=()=>{let p=$("pin").value.trim();if(p.length<6){$("serverStatus").textContent="Use a PIN of at least 6 characters.";return}sessionStorage.setItem("rayan_pin",p);$("serverStatus").textContent="PIN saved for this browser session.";};
+async function api(path,body){let res=await fetch(path,{method:"POST",headers:{"Content-Type":"application/json","x-rayan-pin":pin()},body:JSON.stringify(body||{})});let data=await res.json().catch(()=>({error:"Server returned an unreadable response"}));if(!res.ok)throw Error(data.error||"Request failed ("+res.status+")");return data}
+$("testServer").onclick=async()=>{try{let d=await api("/.netlify/functions/health",{});$("serverStatus").textContent=d.message+" · "+(d.marketConfigured?"Market key configured":"Market key missing")+" · "+(d.aiConfigured?"AI key configured":"AI key missing")}catch(e){$("serverStatus").textContent=e.message}};
+function setConn(ok,msg){$("connection").textContent=msg;$("connection").classList.toggle("live",ok)}
+async function loadMarket(){try{let d=await api("/.netlify/functions/market",{symbol:$("symbol").value,interval:$("interval").value,higherInterval:$("higherInterval").value});market=d;$("price").textContent=d.quote.price||"—";$("bidask").textContent=(d.quote.bid||"—")+" / "+(d.quote.ask||"—");$("spread").textContent=d.quote.spread||"—";$("updated").textContent="Updated "+new Date().toLocaleTimeString();$("liveNote").textContent=d.note||"Third-party quote. Verify against broker.";setConn(true,"LIVE DATA");drawChart(d.candles);return d}catch(e){setConn(false,"DATA ERROR");$("liveNote").textContent=e.message;throw e}}
+$("connect").onclick=async()=>{if(!pin()){alert("Open Settings and save your RAYAN access PIN first.");return}try{await loadMarket();if(timer)clearInterval(timer);timer=setInterval(()=>loadMarket().catch(()=>{}),Number($("refresh").value)*1000)}catch(e){alert(e.message)}};
+$("stop").onclick=()=>{if(timer)clearInterval(timer);timer=null;setConn(false,"UPDATES STOPPED")};
+$("refresh").onchange=()=>{if(timer){clearInterval(timer);timer=setInterval(()=>loadMarket().catch(()=>{}),Number($("refresh").value)*1000)}};
+function ema(v,p){let k=2/(p+1),o=[],e=v[0];for(let x of v){e=x*k+e*(1-k);o.push(e)}return o}
+function rsi(v,p=14){let g=0,l=0;for(let i=1;i<=p;i++){let d=v[i]-v[i-1];g+=Math.max(0,d);l+=Math.max(0,-d)}g/=p;l/=p;for(let i=p+1;i<v.length;i++){let d=v[i]-v[i-1];g=(g*(p-1)+Math.max(0,d))/p;l=(l*(p-1)+Math.max(0,-d))/p}return l===0?100:100-100/(1+g/l)}
+function structure(a){let c=a.map(x=>+x.close),e20=ema(c,20),e50=ema(c,50),e200=ema(c,Math.min(200,Math.max(30,c.length-1))),r=rsi(c),last=a.at(-1),prev=a.at(-2),prior=a.slice(-21,-1),hi=Math.max(...prior.map(x=>+x.high)),lo=Math.min(...prior.map(x=>+x.low));let trend=e20.at(-1)>e50.at(-1)&&e50.at(-1)>e200.at(-1)?"bull":e20.at(-1)<e50.at(-1)&&e50.at(-1)<e200.at(-1)?"bear":"mixed";let bos=+last.close>hi?"Bullish BOS":+last.close<lo?"Bearish BOS":"No BOS";let sweepH=+last.high>hi&&+last.close<hi,sweepL=+last.low<lo&&+last.close>lo;let fvgB=a.length>3&&+last.low>+a.at(-3).high,fvgS=a.length>3&&+last.high<+a.at(-3).low;let bull=(trend==="bull"?2:0)+(r>50&&r<70?1:0)+(bos==="Bullish BOS"?2:0)+(sweepL?1:0)+(fvgB?1:0);let bear=(trend==="bear"?2:0)+(r<50&&r>30?1:0)+(bos==="Bearish BOS"?2:0)+(sweepH?1:0)+(fvgS?1:0);return{trend,r,bos,sweepH,sweepL,fvgB,fvgS,bull,bear,close:+last.close,hi,lo}}
+$("runAnalysis").onclick=async()=>{try{let d=market||await loadMarket();let a=structure(d.candles),h=structure(d.higherCandles),agree=a.trend!=="mixed"&&a.trend===h.trend,blocked=$("newsBlock").checked||$("eventBlock").checked||$("spreadBlock").checked;let signal="WAIT",why=[];if(agree&&a.trend==="bull"&&a.bull>=5&&a.bull-a.bear>=3&&!blocked)signal="BUY";if(agree&&a.trend==="bear"&&a.bear>=5&&a.bear-a.bull>=3&&!blocked)signal="SELL";if(!agree)why.push("Higher timeframe does not confirm entry trend.");if(blocked)why.push("Safety filter active. Check news and execution conditions.");if(signal==="WAIT")why.push("Evidence threshold not met. No trade is the decision.");lastAnalysis={symbol:$("symbol").value,signal,a,h,why};$("analysisResult").innerHTML=`<div class="big ${signal.toLowerCase()}">${signal}</div><div class="grid3"><div class="metric"><span>Entry trend</span><b>${a.trend}</b></div><div class="metric"><span>Higher trend</span><b>${h.trend}</b></div><div class="metric"><span>RSI</span><b>${a.r.toFixed(1)}</b></div><div class="metric"><span>Bull score</span><b>${a.bull}</b></div><div class="metric"><span>Bear score</span><b>${a.bear}</b></div><div class="metric"><span>Market structure</span><b>${a.bos}</b></div></div><div class="item">Liquidity clue: ${a.sweepH?"Possible buy-side sweep":a.sweepL?"Possible sell-side sweep":"None detected"}</div><div class="item">FVG clue: ${a.fvgB?"Bullish":a.fvgS?"Bearish":"None detected"}</div><div class="item">Last candle close: ${a.close}</div><div class="item">${why.join("<br>")}</div><p class="hint">Rule-based screening only; not a probability or guaranteed forecast. No entry, SL or TP is issued unless you independently validate the setup.</p>`}catch(e){$("analysisResult").textContent=e.message}};
+function drawChart(a){let c=$("chart");if(!c)return;let ctx=c.getContext("2d"),w=c.width=c.clientWidth*devicePixelRatio,h=c.height=c.clientHeight*devicePixelRatio;ctx.clearRect(0,0,w,h);let v=a.slice(-50),max=Math.max(...v.map(x=>+x.high)),min=Math.min(...v.map(x=>+x.low)),pad=12*devicePixelRatio,step=(w-2*pad)/v.length;ctx.strokeStyle="#34516a";ctx.lineWidth=devicePixelRatio;for(let i=0;i<5;i++){let y=pad+i*(h-2*pad)/4;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}v.forEach((x,i)=>{let X=pad+i*step+step/2,scale=(h-2*pad)/(max-min||1),Y=q=>h-pad-(q-min)*scale;ctx.strokeStyle=+x.close>=+x.open?"#42d392":"#ff7180";ctx.fillStyle=ctx.strokeStyle;ctx.beginPath();ctx.moveTo(X,Y(+x.high));ctx.lineTo(X,Y(+x.low));ctx.stroke();let top=Y(Math.max(+x.open,+x.close)),bot=Y(Math.min(+x.open,+x.close));ctx.fillRect(X-step*.28,top,step*.56,Math.max(2,bot-top))})}
+$("imageFile").onchange=async e=>{let f=e.target.files[0];if(!f)return;if(f.size>3*1024*1024){alert("Choose an image smaller than 3 MB.");e.target.value="";return}if(!["image/png","image/jpeg","image/webp"].includes(f.type)){alert("Use PNG, JPG or WEBP.");return}let url=URL.createObjectURL(f);$("imagePreview").src=url;$("imagePreview").classList.remove("hidden");imageData=await new Promise((resolve,reject)=>{let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(f)})};
+$("visionBtn").onclick=async()=>{if(!imageData){alert("Choose a chart screenshot first.");return}if(!pin()){alert("Save your RAYAN PIN in Settings first.");return}let b=$("visionBtn");b.disabled=true;b.textContent="ANALYSING...";$("visionResult").textContent="Sending screenshot securely for analysis...";try{let d=await api("/.netlify/functions/vision",{image:imageData,focus:$("focus").value,symbol:$("symbol").value,interval:$("interval").value});$("visionResult").innerHTML="<div style='white-space:pre-wrap;line-height:1.55'></div>";$("visionResult").firstChild.textContent=d.analysis||"No analysis returned."}catch(e){$("visionResult").textContent=e.message}finally{b.disabled=false;b.textContent="ANALYSE SCREENSHOT"}};
+$("calcRisk").onclick=()=>{let bal=+$("rBalance").value,p=+$("rPercent").value,en=+$("entry").value,sl=+$("sl").value,cv=+$("contractValue").value,dist=Math.abs(en-sl),cash=bal*p/100;if(!(bal>0&&p>0&&p<=1&&dist>0&&cv>0)){$("riskResult").textContent="Check all values. Risk is capped at 1%; broker contract value is required.";return}let lots=cash/(dist*cv);$("riskResult").textContent=`Maximum planned loss: $${cash.toFixed(2)}. Estimated size: ${lots.toFixed(4)} lots. Verify tick value, lot size, account currency, spread and stop distance with your broker before using.`};
+function journal(){try{return JSON.parse(localStorage.rayanV3Journal||"[]")}catch{return[]}}
+function renderJournal(){$("journal").innerHTML=journal().slice(0,40).map(x=>`<div class="item"><b>${x.symbol} · ${x.signal}</b><br><span class="hint">${x.time} · ${x.note}</span></div>`).join("")||"No saved records."}
+$("saveJournal").onclick=()=>{if(!lastAnalysis){alert("Run analysis first.");return}let j=journal();j.unshift({time:new Date().toLocaleString(),symbol:lastAnalysis.symbol,signal:lastAnalysis.signal,note:"Entry trend "+lastAnalysis.a.trend+", HTF "+lastAnalysis.h.trend+", RSI "+lastAnalysis.a.r.toFixed(1)});localStorage.rayanV3Journal=JSON.stringify(j);renderJournal()};
+$("exportJournal").onclick=()=>{let blob=new Blob([JSON.stringify(journal(),null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rayan-fx-v3-journal.json";a.click();URL.revokeObjectURL(a.href)};
+$("clearJournal").onclick=()=>{if(confirm("Delete all local journal entries?")){localStorage.removeItem("rayanV3Journal");renderJournal()}};
+renderJournal();
+</script></body></html>
